@@ -77,7 +77,8 @@ table {
       }
 
     .Disclaimer{
-      font-size: 10px;
+        margin-top: 10px;
+      font-size: 6px;
     }
     
 @page {
@@ -122,6 +123,14 @@ body{
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td><strong>Client Name</strong></td>
+                    <td id="ClientNameCell"></td>
+                </tr>
+                <tr>
+                    <td><strong>Project ID</strong></td>
+                    <td id="ProjectIDCell"></td>
+                </tr>
                 <tr>
                 <td><strong>Property Type</strong></td>
                 <td id="PropertyTypeCell"></td>
@@ -190,8 +199,16 @@ body{
         const carpetArea = parseFloat(urlParams.get("carpetArea"));
         const selectedAddOns = urlParams.get("selectedAddOns").split(",");
         const estimatedPrice = parseFloat(urlParams.get("estimatedPrice"));
+        const clientName = urlParams.get("clientName");
+        const projectID = urlParams.get("projectID");
 
-           
+    
+        
+    const clientNameCell = document.getElementById("ClientNameCell");
+    clientNameCell.textContent += clientName;
+    
+    const projectIDCell = document.getElementById("ProjectIDCell");
+    projectIDCell.textContent += projectID;
     const propertyTypeCell = document.getElementById("PropertyTypeCell");
     
     // Set the text content of the house size cell to the value of selectedHouseSizeParam
@@ -206,8 +223,6 @@ body{
     
     // Set the text content of the house size cell to the value of selectedHouseSizeParam
     cityCell.textContent += city.charAt(0).toUpperCase() + city.slice(1);
-
-     
     const stylingCell = document.getElementById("StylingCell");
     
     // Set the text content of the house size cell to the value of selectedHouseSizeParam

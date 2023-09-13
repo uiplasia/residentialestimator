@@ -5,6 +5,9 @@ body {
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+form{
+  display: block;
+}
 .logo {
   width: 351.7px; /* Set the width of the logo */
   height: 200px; /* Set the height of the logo */
@@ -402,7 +405,46 @@ button:hover {
   margin: auto;
   line-height: normal;
 }
-  
+  .input-label-ClientName{
+    flex: 0 0 auto; /* Avoid label from expanding */
+    padding: 5px 10px; /* Add padding to the label box */
+    width: 198px;
+    height: 198px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    font-family: Alegreya;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-left: 20px;
+    margin: 0 18% 0 20%;
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.25);
+    border: 10px solid #141A20;
+    background: #3E4B57;
+    color: #DDE9EC;
+  }
+  .input-label-ProjectID{
+    flex: 0 0 auto; /* Avoid label from expanding */
+    padding: 5px 10px; /* Add padding to the label box */
+    width: 198px;
+    height: 198px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    font-family: Alegreya;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-left: 20px;
+    margin: 0 18% 0 20%;
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.25);
+    border: 10px solid #141A20;
+    background: #3E4B57;
+    color: #DDE9EC;
+  }
   /* Rest of your existing styles */
   .input-label-carpetarea {
     flex: 0 0 auto; /* Avoid label from expanding */
