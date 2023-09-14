@@ -155,8 +155,21 @@ body{
 <td><strong>Add-ons</strong></td>
 <td id="AddOnsCell"></td>
 </tr>
-<td><strong>Estimated Price</strong></td>
-<td id="EstimatedPriceCell"></td>
+<tr>
+    
+    <td><strong>Estimated Price</strong></td>
+    <td id="EstimatedPriceCell"></td>
+</tr>
+<td><strong>Signing Amount</strong></td>
+<td id="SigningAmountCell"></td>
+</tr>
+<td><strong>Phase 1 Amount</strong></td>
+<td id="PhaseOneAmountCell"></td>
+</tr>
+<td><strong>Phase 2: Two Days Before Completion</strong></td>
+<td id="TwoDaysBeforeCompleteCell"></td>
+</tr>
+
 
 <table>
     <thead>
@@ -201,7 +214,9 @@ body{
         const estimatedPrice = parseFloat(urlParams.get("estimatedPrice"));
         const clientName = urlParams.get("clientName");
         const projectID = urlParams.get("projectID");
-
+        const signingAmount = urlParams.get("signingAmount");
+        const phaseOneComplete = urlParams.get("phaseOneComplete");
+        const twoDaysBeforeComplete = urlParams.get("twoDaysBeforeComplete");
     
         
     const clientNameCell = document.getElementById("ClientNameCell");
@@ -244,7 +259,8 @@ body{
     addOnsCell.textContent += selectedAddOns.join(", ");
     
     const estimatedPriceCell = document.getElementById("EstimatedPriceCell");
-
+    
+    
 // Assuming totalCostParam is a numeric value, e.g., 10000
 const formattedPrice = parseFloat(estimatedPrice).toLocaleString("en-IN", {
     style: "currency",
@@ -252,6 +268,48 @@ const formattedPrice = parseFloat(estimatedPrice).toLocaleString("en-IN", {
 });
 
 estimatedPriceCell.textContent = formattedPrice;
+const signingAmountCell = document.getElementById("SigningAmountCell");
+    
+    
+    // Assuming totalCostParam is a numeric value, e.g., 10000
+    const formattedSigningPrice = parseFloat(signingAmount).toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR"
+    });
+signingAmountCell.textContent = formattedSigningPrice;
+
+const phaseOneAmountCell = document.getElementById("PhaseOneAmountCell");
+    
+    
+    // Assuming totalCostParam is a numeric value, e.g., 10000
+    const formattedPhaseOnePrice = parseFloat(phaseOneComplete).toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR"
+    });
+phaseOneAmountCell.textContent = formattedPhaseOnePrice;
+
+const twoDaysBeforeCompleteCell = document.getElementById("TwoDaysBeforeCompleteCell");
+    
+    
+    // Assuming totalCostParam is a numeric value, e.g., 10000
+    const formattedPhaseTwoPrice = parseFloat(twoDaysBeforeComplete).toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR"
+    });
+twoDaysBeforeCompleteCell.textContent = formattedPhaseTwoPrice;
+
+
+
+
+
+
+
+
+
+
+
+
+
 const planTypeCell2 = document.getElementById("TablePlan2");
 
     // Set the text content of the plan type cell to the value of selectedPlanTypeParam
