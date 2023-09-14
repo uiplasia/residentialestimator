@@ -73,11 +73,13 @@ function calculateEstimate() {
   const combinedFactor = propertyFactor * stylingFactor * ceilingHeightFactor * planFactor;
 
   let estimatedPrice = basePrice * combinedFactor;
+  
 
   // Calculate add-ons cost
   addOnValues.forEach((addOn) => {
       estimatedPrice += addOnPrices[addOn][city] * carpetArea;
   });
+
 
   return estimatedPrice;
  // Display price with two decimal places
@@ -166,6 +168,19 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   updateResultOutput(estimatedPrice, selections);
   window.scrollTo({ top: 0, behavior: "smooth" });
   document.getElementById('calculationResult').value = estimatedPrice;
+  // const selectedSigningAmount = document.getElementById('signingAmount');
+  // const selectedPhaseOneComplete = document.getElementById('phaseOneComplete');
+  // const selectedTwoDaysBeforeComplete = document.getElementById('twoDaysBeforeComplete');
+  selectedSigningAmount = 0.4 * estimatedPrice;
+  selectedPhaseOneComplete = 0.4 * estimatedPrice;
+  selectedTwoDaysBeforeComplete = 0.2 * estimatedPrice;
+  console.log("signing amount:",selectedSigningAmount);
+  console.log("signing amount:",selectedPhaseOneComplete);
+  console.log("signing amount:",selectedTwoDaysBeforeComplete);
+  document.getElementById('signingAmount').value = selectedSigningAmount;
+  document.getElementById('phaseOneComplete').value = selectedPhaseOneComplete;
+  document.getElementById('twoDaysBeforeComplete').value = selectedTwoDaysBeforeComplete;
+
   
 });
 
@@ -279,6 +294,9 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   const estimatedPrice = calculateEstimate(selections);
   console.log("Estimated Price:", estimatedPrice); // Check if estimated price is calculated correctly
   updateResultOutput(estimatedPrice, selections);
+  
+  
+
 });
 
 // Get all the city buttons
