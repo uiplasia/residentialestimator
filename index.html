@@ -1,289 +1,158 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Design Fee Estimator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="icon" href="favicon.ico">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="favicon.ico">
+        <title>Interior Design Price Estimator</title>
+    </head>
+    <body>
+        <div class="content"></div>
+        <h1><img class="logo" src="companylogo.jpg" alt="UIPL"></h1>
+        <h2>BudgetBliss<br></h2><h3> Discover Blissful Budgeting at U&I Interiors </h3>
+        <form method="post" action="https://script.google.com/macros/s/AKfycbzqVDF4FuR1vv4qQTUjwO08uQCUa3AGid97H5r_rGkT3rv4FbMBD8HQ1qReGFH3HxZ7/exec" name="contact-form" >
+        <div class="result-box">
+            <h5>Estimation Results</h5>
+            <p><strong> Project Type:</strong> <span id="result-project-type"></span></p>
+            <p><strong> City:</strong> <span id="result-city"></span></p>
+            <p><strong> Property Type:</strong> <span id="result-property-type"></span></p>
+            <p><strong> Styling:</strong> <span id="result-styling"></span></p>
+            <p><strong> Ceiling Height:</strong> <span id="result-ceiling-height"></span></p>
+            <p><strong> Plan Type:</strong> <span id="result-plan-type"></span></p>
+            <p><strong> Carpet Area:</strong> <span id="result-carpet-area"></span> sq. ft.</p>
+            <p><strong> Add-ons:</strong> <span id="result-add-ons"></span></p>
+            <h4> Estimated Price:</h4>
+            <p><strong><span id="result-estimated-price"></span></strong></p>
+        </div>
+            
+     
+          <div class="input-container">
+            <label for="ClientName" class="input-label-ClientName">Client Name</label>
+            <input type="text" id="ClientName" placeholder="Enter Name" class="text-input" name="ClientName">
+          </div>
+          <div class="input-container">
+            <label for="ProjectID" class="input-label-ProjectID">Project ID</label>
+            <input type="text" id="ProjectID" placeholder="Enter Project ID" class="text-input" name="ProjectID">
+          </div>
+          </div>
+            
+          <div class="input-container">
+                
+                <label for="property-type" class="input-label-property">Property Type:</label>
+                <div class="button-group" id="property-type-buttons">
+                  <button type="button" class ="button-option-property" data-value="Apartment" name="property-type">Apartment</button>
+                  <button type="button" class="button-option-property" data-value="Bungalow">Bungalow</button>
+                  <button type="button" class="button-option-property" data-value="Farmhouse">Farmhouse</button>
+                  <button type="button" class="button-option-property" data-value="Villa">Villa</button>
+                  <!-- Add more property type buttons here -->
+                </div>
+              </div>
+              <div class="input-container">
+                <label for="city" class="input-label-city">City:</label>
+                    <div class="button-group" id="city-buttons">
+                      <button type="button"class="button-option-city" data-value="Mumbai">Mumbai</button>
+                      <button type="button"class="button-option-city" data-value="Ahmedabad">Ahmedabad</button>
+                      <button type="button"class="button-option-city" data-value="Hyderabad">Hyderabad</button>
+                      <button type="button"class="button-option-city" data-value="Metro City 1">Metro City 1</button>
+                      <button type="button"class="button-option-city" data-value="Metro City 2">Metro City 2</button>
+                      <button type="button"class="button-option-city" data-value="Metro City Outskirts">Metro City Outskirts</button>
+                      <!-- Add more city buttons here -->
+                    </div>
+                  </div>
+                  
+                  <div class="input-container">
+                    <label for="ceiling-height" class="input-label-ceiling">Ceiling Height:</label>
+                    <div class="button-group" id="ceiling-height-buttons">
+                      <button type="button"class="button-option-ceiling" data-value="10ft">10 ft</button>
+                      <button type="button"class="button-option-ceiling" data-value="11ft">11 ft</button>
+                      <button type="button"class="button-option-ceiling" data-value="12ft">12 ft</button>
+                      <button type="button"class="button-option-ceiling" data-value="13ft">13 ft</button>
+                      <button type="button"class="button-option-ceiling" data-value="14ft">14 ft</button>
+                      <button type="button"class="button-option-ceiling" data-value="14ft+">14 ft+</button>
+                      <!-- Add more ceiling height buttons here -->
+                    </div>
+                  </div>
+                  
+                  <div class="input-container">
+                    <label for="styling" class="input-label-styling">Styling:</label>
+                    <div class="button-group" id="styling-buttons">
+                    <button type="button"class="button-option-styling" data-value="Low">Low</button>
+                    <button type="button"class="button-option-styling" data-value="Medium">Medium</button>
+                    <button type="button"class="button-option-styling" data-value="High">High</button>
+                    <button type="button"class="button-option-styling" data-value="Very High">Very High</button>
+                    <!-- Add more styling buttons here -->
+                  </div>
+                </div>
+                
+                
+                <div class="input-container">
+                  <label for="project-type" class="input-label-project">Project Type:</label>
+                  <div class="button-group" id="project-type-buttons">
+                    <button type="button"class="button-option-project" data-value="warmshell">Warmshell</button>
+                    <button type="button"class="button-option-project" data-value="bareshell">Bareshell</button>
+                    <button type="button"class="button-option-project" data-value="renovation">Interior Renovation</button>
+                    <button type="button"class="button-option-project" data-value="architecture">Architecture</button>
+                  </div>
+                </div>
+                
+                
+                <div class="input-container">
+                  <label for="carpet-area" class="input-label-carpetarea">Carpet Area <br>(sq. ft.):</label>
+                  <input type="number" id="carpet-area" placeholder="Enter carpet area" class="text-input" name="carpet-area">
+                </div>
+                
+                
+                <div class="input-container">
+                  <label class="input-label-addons">Add ons *:</label>
+                  <div class="checkbox-group" id="add-ons-container">
+                    <!-- Checkboxes will be generated here -->
+                  </div>
+                </div>
+          <div class="input-container">
+            <label for="plan" class="input-label-plan">Plan Type:</label>
+            <div class="button-group" id="plan-buttons">
+              <button type="button"class="button-option-plan" data-value="Premium">Premium</button>
+              <button type="button"class="button-option-plan" data-value="Premium Plus">Premium Plus</button>
+              <button type="button"class="button-option-plan" data-value="Luxury">Luxury</button>
+              <button type="button"class="button-option-plan" data-value="Ultra Luxury">Ultra Luxury</button>
+              <!-- Add more plan type buttons here -->
+            </div>
+          </div>
+          
+          <input type="hidden" id="selected-city" name="city" value="">
+          <!-- Hidden input fields for selected values -->
+          <input type="hidden" id="selected-project-type" name="project-type" value="">
+          <input type="hidden" id="selected-property-type" name="property-type" value="">
+          <input type="hidden" id="selected-styling" name="styling" value=""> 
+          <input type="hidden" id="selected-ceiling-height" name="ceiling-height" value="">
+          <input type="hidden" id="selected-plan-type" name="plan-type" value="">
+   
+          <input type="hidden" name="calculationResult" id="calculationResult" value="">
+          <input type="hidden" name="signingAmount" id="signingAmount" value="">
+          <input type="hidden" name="phaseOneComplete" id="phaseOneComplete" value="">
+          <input type="hidden" name="twoDaysBeforeComplete" id="twoDaysBeforeComplete" value="">
+          <input type="hidden" name="calculationTaxAmount" id="calculationTaxAmount" value="">
+          <input type="hidden" name="totalCalculationWithTax" id="totalCalculationWithTax" value="">
+          <input type="hidden" name="signingTaxAmount" id="signingTaxAmount" value="">
+          <input type="hidden" name="totalSigningWithTax" id="totalSigningWithTax" value="">
+          <input type="hidden" name="phaseOneTaxAmount" id="phaseOneTaxAmount" value="">
+          <input type="hidden" name="phaseOneWithTax" id="phaseOneWithTax" value="">
+          <input type="hidden" name="twoDaysBeforeTaxAmount" id="twoDaysBeforeCompleteTaxAmount" value="">
+          <input type="hidden" name="twoDaysBeforeWithTax" id="twoDaysBeforeWithTax" value="">
 
-    
-</head>
-<body>
-    <h1> <img class="logo" src="companylogo.jpg" alt="UIPL"></h1>
-    <div class="container">
-        <h1>Design Fee Estimator</h1>
+
+
+          <button type="button" id="calculate-btn">Calculate Estimate</button>
+          <a href="result.html"target="_blank"><button type="submit" id="Confirm-btn">Confirm</button></a>
+          
+          
+        </div>
         
-        <form method="post" action="https://script.google.com/macros/s/AKfycbwxSMF8og98QHkImnGvxeX7sP94Fi7rBDjzagmD6qTSOn0LRVuDBiA3xRfl_rGpVWBK0w/exec" name ="contact-form">
-            <label for="ClientName">Name:</label>
-            <input type="text" id="ClientName" name="ClientName">
-            <label for="ProjectID">ProjectID</label>
-            <input name="ProjectID">
-            <label for="city">City:</label>
-            <select id="city" name="city">
-                <option value="" disabled selected>Select City</option>
-                <option value="ahmedabad">Ahmedabad</option>
-                <option value="mumbai">Mumbai</option>
-                <option value="hyderabad">Hyderabad</option>
-                <option value="metro1">Metro 1</option>
-                <option value="metro2">Metro 2</option>
-                <option value="metroOutskirt">Metro Outskirt</option>
-            </select>
-            <br>
-            <label for="projectSize">House Size:</label>
-            <select id="projectSize" name="projectSize">
-                <option value="" disabled selected>Select House Size</option>
-                <option value="3bhk">3 BHK</option>
-                <option value="4bhk">4 BHK</option>
-                <option value="5bhk">5 BHK</option>
-                <option value="6bhk">6 BHK</option>
-                <option value="7bhk">7 BHK</option>
-            </select>
-            <br>
-            <label for="projectType">Project Type:</label>
-            <select id="projectType" name="projectType">
-                <option value="" disabled selected>Select Project Type</option>
-                <option value="warmshell">Warm Shell</option>
-                <option value="bareshell">Bare Shell</option>
-                <option value="interior">Interior Designing</option>
-                <option value="architecture">Architecture</option>
-            </select>
-            <br>
-            <label for="projectplan">Plan:</label>
-            <select id="projectPlan" name="projectPlan">
-                <option value="" disabled selected>Select Plan</option>
-                <option value="Premium">Premium</option>
-                <option value="Premiumplus">Premium Plus</option>
-                <option value="Luxury">Luxury</option>
-                <option value="UltraLuxury">Ultra Luxury</option>
-            </select>
+        <div id="result"></div> 
         
-            <br>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Room Type</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Bedroom</td>
-                        <td><input type="number" name="bedroom" min="0"></td>
-                    </tr>
-                    <tr>
-                        <td>Common Bathroom</td>
-                        <td><input type="number" name="commonbathroom" min="0"></td>
-                    </tr>
-                    
-                    <!-- Add more rows for additional attributes -->
-                    <tr>
-                        <td>Drawing Room</td>
-                        <td><input type="number" name="DRAWINGROOM" min="0"></td>
-                    </tr><tr>
-                        <td>Kitchen</td>
-                        <td><input type="number" name="KITCHEN" min="0"></td>
-                    </tr><tr>
-                        <td>Entrance</td>
-                        <td><input type="number" name="entrance" min="0"></td>
-                    </tr><tr>
-                        <td>Dining Area</td>
-                        <td><input type="number" name="DININGAREA" min="0"></td>
-                    </tr><tr>
-                        <td>Wash Yard</td>
-                        <td><input type="number" name="WASHYARD" min="0"></td>
-                    </tr><tr>
-                        <td>Attached Bathroom</td>
-                        <td><input type="number" name="ATT.BATH" min="0"></td>
-                    </tr><tr>
-                        <td>Balcony</td>
-                        <td><input type="number" name="BALCONY" min="0"></td>
-                    </tr><tr>
-                        <td>Vestibule</td>
-                        <td><input type="number" name="VESTIBULE" min="0"></td>
-                    </tr><tr>
-                        <td>Varandah</td>
-                        <td><input type="number" name="VARANDAH" min="0"></td>
-                    </tr><tr>
-                        <td>Study</td>
-                        <td><input type="number" name="STUDY" min="0"></td>
-                    </tr><tr>
-                        <td>Servant Room</td>
-                        <td><input type="number" name="SERVANTROOM" min="0"></td>
-                    </tr><tr>
-                        <td>Servant Bathroom</td>
-                        <td><input type="number" name="SERVANTBATH" min="0"></td>
-                    </tr><tr>
-                        <td>Powder Room</td>
-                        <td><input type="number" name="POWDERROOM" min="0"></td>
-                    </tr><tr>
-                        <td>Dresser/Walk-in Wardrobe</td>
-                        <td><input type="number" name="DRESSER" min="0"></td>
-                    </tr><tr>
-                        <td>Pantry</td>
-                        <td><input type="number" name="pantry" min="0"></td>
-                    </tr><tr>
-                        <td>Foyer/Entryway</td>
-                        <td><input type="number" name="Foyer" min="0"></td>
-                    </tr><tr>
-                        <td>Living Room</td>
-                        <td><input type="number" name="LIVINGROOM" min="0"></td>
-                    </tr><tr>
-                        <td>Family Sit-Out</td>
-                        <td><input type="number" name="FAMILYSIT-OUT" min="0"></td>
-                    </tr><tr>
-                        <td> Hallway/Corridor</td>
-                        <td><input type="number" name="Hallway" min="0"></td>
-                    </tr><tr>
-                        <td>Small Balcony</td>
-                        <td><input type="number" name="SmallBalcony" min="0"></td>
-                    </tr><tr>
-                        <td>Medium Balcony</td>
-                        <td><input type="number" name="MediumBalcony" min="0"></td>
-                    </tr><tr>
-                        <td>Large Balcony </td>
-                        <td><input type="number" name="LargeBalcony" min="0"></td>
-                    </tr><tr>
-                        <td>Small Bathroom</td>
-                        <td><input type="number" name="SmallBathroom" min="0"></td>
-                    </tr><tr>
-                        <td>Medium Bathroom </td>
-                        <td><input type="number" name="MediumBathroom" min="0"></td>
-                    </tr><tr>
-                        <td>Large Bathroom</td>
-                        <td><input type="number" name="LargeBathroom" min="0"></td>
-                    </tr><tr>
-                        <td>Small Terrace</td>
-                        <td><input type="number" name="SmallTerrace" min="0"></td>
-                    </tr><tr>
-                        <td>Medium Terrace</td>
-                        <td><input type="number" name="MediumTerrace" min="0"></td>
-                    </tr><tr>
-                        <td>Large Terrace</td>
-                        <td><input type="number" name="LargeTerrace" min="0"></td>
-                    </tr><tr>
-                        <td>Pooja</td>
-                        <td><input type="number" name="Pooja" min="0"></td>
-                    </tr><tr>
-                        <td>Staircase</td>
-                        <td><input type="number" name="Staircase" min="0"></td>
-                    </tr><tr>
-                        <td>Outer Kitchen</td>
-                        <td><input type="number" name="OUTERKITCHEN" min="0"></td>
-                    </tr><tr>
-                        <td>Cloakroom</td>
-                        <td><input type="number" name="Cloakroom" min="0"></td>
-                    </tr><tr>
-                        <td>Plant Room</td>
-                        <td><input type="number" name="PlantRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Safe Room</td>
-                        <td><input type="number" name="SafeRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Panic Room</td>
-                        <td><input type="number" name="PanicRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Server Room</td>
-                        <td><input type="number" name="ServerRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Pump Room</td>
-                        <td><input type="number" name="PumpRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Guest Room</td>
-                        <td><input type="number" name="GuestRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Children's Room/Nursery</td>
-                        <td><input type="number" name="ChildrenRoom" min="0"></td>
-                    </tr><tr>
-                    
-                        <td>Gameroom</td>
-                        <td><input type="number" name="GameRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Wine Cellar</td>
-                        <td><input type="number" name="WineCellar" min="0"></td>
-                    </tr><tr>
-                        <td>Craft Room</td>
-                        <td><input type="number" name="CraftRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Workshop</td>
-                        <td><input type="number" name="Workshop" min="0"></td>
-                    </tr><tr>
-                        <td>Media Room</td>
-                        <td><input type="number" name="MediaRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Den</td>
-                        <td><input type="number" name="Den" min="0"></td>
-                    </tr><tr>
-                        <td>Bar Room</td>
-                        <td><input type="number" name="BarRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Library</td>
-                        <td><input type="number" name="Library" min="0"></td>
-                    </tr><tr>
-                        <td>Music Room</td>
-                        <td><input type="number" name="MusicRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Hobby Room</td>
-                        <td><input type="number" name="HobbyRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Home Office</td>
-                        <td><input type="number" name="HomeOffice" min="0"></td>
-                    </tr><tr>
-                        <td>Home Gym</td>
-                        <td><input type="number" name="HomeGym" min="0"></td>
-                    </tr><tr>
-                        <td>Home Theatre</td>
-                        <td><input type="number" name="HomeTheatre" min="0"></td>
-                    </tr><tr>
-                        <td>Art Studio</td>
-                        <td><input type="number" name="ArtStudio" min="0"></td>
-                    </tr><tr>
-                        <td>Billiard Room</td>
-                        <td><input type="number" name="BilliardRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Observatory</td>
-                        <td><input type="number" name="Observatory" min="0"></td>
-                    </tr><tr>
-                        <td>Trophy Room</td>
-                        <td><input type="number" name="TrophyRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Sauna</td>
-                        <td><input type="number" name="Sauna" min="0"></td>
-                    </tr><tr>
-                        <td>Jacuzzi Room</td>
-                        <td><input type="number" name="JacuzziRoom" min="0"></td>
-                    </tr><tr>
-                        <td>Larder</td>
-                        <td><input type="number" name="Larder" min="0"></td>
-                    </tr><tr>
-                        <td>Bunker</td>
-                        <td><input type="number" name="Bunker" min="0"></td>
-                    </tr>
-
-
-</tbody>
-</table>
-<input type="hidden" name="calculationResult" id="calculationResult" value="">
-<input type="hidden" name="signingAmountResult" id="signingAmountResult" value="">
-<input type="hidden" name="layoutFinalizationAmountResult" id="layoutFinalizationAmountResult" value="">
-<input type="hidden" name="3dFinalizationAmountResult" id="3dFinalizationAmountResult" value="">
-<input type="hidden" name="units" id="units" value="">
-<input type="hidden" name="calculationTaxAmount" id="calculationTaxAmount" value="">
-<input type="hidden" name="totalCalculationWithTax" id="totalCalculationWithTax" value="">
-<input type="hidden" name="signingTaxAmount" id="signingTaxAmount" value="">
-<input type="hidden" name="totalSigningWithTax" id="totalSigningWithTax" value="">
-<input type="hidden" name="layoutFinalizationTaxAmount" id="layoutFinalizationTaxAmount" value="">
-<input type="hidden" name="layoutFinalizationWithTax" id="layoutFinalizationWithTax" value="">
-<input type="hidden" name="3dFinalizationTaxAmount" id="3dFinalizationTaxAmount" value="">
-<input type="hidden" name="3dFinalizationWithTax" id="3dFinalizationWithTax" value="">
-
-<label for="totalCost">Estimated Design Fee:</label>
-<div id="result" name="result">-</div>
-            <br>
-            <button type="submit" id="calculate-btn">Calculate button</button>
-        </form>
-    </div>
-    
-
-    <script src="script.js"></script>
-  
-</body>
-</html>
+      </form>
+      </body>
+      
+      <script src="script.js"></script>
+      </html>
