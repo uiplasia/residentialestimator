@@ -143,8 +143,8 @@ body{
             <td><strong>City</strong></td>
             <td id="CityCell"></td>
         </tr>
-        <td><strong>Styling</strong></td>
-        <td id="StylingCell"></td>
+      
+        
     </tr>
     <td><strong>Plan Type</strong></td>
     <td id="PlanTypeCell"></td>
@@ -169,6 +169,7 @@ body{
 <td><strong>Phase 2: Two Days Before Completion</strong></td>
 <td id="TwoDaysBeforeCompleteCell"></td>
 </tr>
+<td colspan="2"><strong>GST extra as applicable</strong></td>
 
 
 <table>
@@ -206,7 +207,7 @@ body{
         const projectType = urlParams.get("projectType");
         const city = urlParams.get("city");
         const propertyType = urlParams.get("propertyType");
-        const styling = urlParams.get("styling");
+        // const styling = urlParams.get("styling");
         const ceilingHeight = urlParams.get("ceilingHeight");
         const plan = urlParams.get("plan");
         const carpetArea = parseFloat(urlParams.get("carpetArea"));
@@ -236,12 +237,12 @@ body{
      
     const cityCell = document.getElementById("CityCell");
     
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    cityCell.textContent += city.charAt(0).toUpperCase() + city.slice(1);
-    const stylingCell = document.getElementById("StylingCell");
+    // // // Set the text content of the house size cell to the value of selectedHouseSizeParam
+     cityCell.textContent += city.charAt(0).toUpperCase() + city.slice(1);
+    // // const stylingCell = document.getElementById("StylingCell");
     
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    stylingCell.textContent += styling.charAt(0).toUpperCase() + styling.slice(1);
+    // // Set the text content of the house size cell to the value of selectedHouseSizeParam
+    // stylingCell.textContent += styling.charAt(0).toUpperCase() + styling.slice(1);
      
     const planTypeCell = document.getElementById("PlanTypeCell");
     
