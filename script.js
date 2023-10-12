@@ -1,381 +1,1007 @@
-// Constants and variables for factors and prices
-const basePrices = {
-  warmshell: { Mumbai: 3500, Ahmedabad: 2000, Hyderabad: 2500, "Metro City 1" : 3500, "Metro City Outskirts" : 2000, "Metro City 2" :2500 },
-  bareshell: { Mumbai: 4250, Ahmedabad: 2750, Hyderabad: 3250, "Metro City 1" :4250, "Metro City Outskirts" : 2750, "Metro City 2" :3250  },
-  renovation: { Mumbai: 4000, Ahmedabad: 2500, Hyderabad: 3000,"Metro City 1" : 4000, "Metro City Outskirts" : 2500, "Metro City 2" :3000  },
-  architecture: { Mumbai: 6000, Ahmedabad: 5000, Hyderabad: 6000 ,"Metro City 1" : 6000, "Metro City Outskirts" : 5000, "Metro City 2" :6000 },
-};
+document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the "House Size" dropdown and input fields
+    const houseSizeDropdown = document.getElementById("projectSize");
+    const projectTypeDropdown = document.getElementById("projectType");
+    
+    // Define input field names with spaces as they appear in your HTML
+    const inputFields = {
+        "KITCHEN ": document.querySelector('input[name="KITCHEN"]'),
+        "bedroom ": document.querySelector('input[name="bedroom"]'),
+        "entrance ": document.querySelector('input[name="entrance"]'),
+        "DINING AREA ": document.querySelector('input[name="DININGAREA"]'),
+        "WASH YARD ": document.querySelector('input[name="WASHYARD"]'),
+        "COMMON BATH-TOILET ": document.querySelector('input[name="commonbathroom"]'),
+        "BALCONY ": document.querySelector('input[name="BALCONY"]'),
+        "attached bathroom ": document.querySelector('input[name="ATT.BATH"]'),
+        "VESTIBULE ": document.querySelector('input[name="VESTIBULE"]'),
+        "DRAWING ROOM ": document.querySelector('input[name="DRAWINGROOM"]'),
+        "VARANDAH ": document.querySelector('input[name="VARANDAH"]'),
+        "STUDY ": document.querySelector('input[name="STUDY"]'),
+        "SERVANT ROOM ": document.querySelector('input[name="SERVANTROOM"]'),
+        "SERVANT BATH ": document.querySelector('input[name="SERVANTBATH"]'),
+        "POWDER ROOM ": document.querySelector('input[name="POWDERROOM"]'),
+        "DRESSER/ WALK-IN WARDROB ": document.querySelector('input[name="DRESSER"]'),
+        "pantry ": document.querySelector('input[name="pantry"]'),
+        "Foyer/Entryway ": document.querySelector('input[name="Foyer"]'),
+        "LIVING ROOM ": document.querySelector('input[name="LIVINGROOM"]'),
+        "FAMILY SIT-OUT ": document.querySelector('input[name="FAMILYSIT-OUT"]'),
+        "Hallway/Corridor ": document.querySelector('input[name="Hallway"]'),
+        "Small Balcony ": document.querySelector('input[name="SmallBalcony"]'),
+        "Medium Balcony ": document.querySelector('input[name="MediumBalcony"]'),
+        "Large Balcony ": document.querySelector('input[name="LargeBalcony"]'),
+        "Small Bathroom ": document.querySelector('input[name="SmallBathroom"]'),
+        "Medium Bathroom ": document.querySelector('input[name="MediumBathroom"]'),
+        "Large Bathroom ": document.querySelector('input[name="LargeBathroom"]'),
+        "Small Terrace ": document.querySelector('input[name="SmallTerrace"]'),
+        "Medium Terrace ": document.querySelector('input[name="MediumTerrace"]'),
+        "Large Terrace ": document.querySelector('input[name="LargeTerrace"]'),
+        "Pooja ": document.querySelector('input[name="Pooja"]'),
+        "Staircase ": document.querySelector('input[name="Staircase"]'),
+        "OUTER KITCHEN ": document.querySelector('input[name="OUTERKITCHEN"]'),
+        "Cloakroom ": document.querySelector('input[name="Cloakroom"]'),
+        "Plant Room ": document.querySelector('input[name="PlantRoom"]'),
+        "Safe Room ": document.querySelector('input[name="SafeRoom"]'),
+        "Panic Room ": document.querySelector('input[name="PanicRoom"]'),
+        "Server Room ": document.querySelector('input[name="ServerRoom"]'),
+        "Pump Room ": document.querySelector('input[name="PumpRoom"]'),
+        "Guest Room ": document.querySelector('input[name="GuestRoom"]'),
+        "Children's Room/Nursery ": document.querySelector('input[name="ChildrenRoom"]'),
+        "Wine Cellar ": document.querySelector('input[name="WineCellar"]'),
+        "Craft Room ": document.querySelector('input[name="CraftRoom"]'),
+        "Workshop ": document.querySelector('input[name="Workshop"]'),
+        "Media Room ": document.querySelector('input[name="MediaRoom"]'),
+        "Den ": document.querySelector('input[name="Den"]'),
+        "Bar Room ": document.querySelector('input[name="BarRoom"]'),
+        "Library ": document.querySelector('input[name="Library"]'),
+        "Game Room ": document.querySelector('input[name="GameRoom"]'),
+        "Music Room ": document.querySelector('input[name="MusicRoom"]'),
+        "Hobby Room ": document.querySelector('input[name="HobbyRoom"]'),
+        "Home Office ": document.querySelector('input[name="HomeOffice"]'),
+        "Home Gym ": document.querySelector('input[name="HomeGym"]'),
+        "Home Theatre ": document.querySelector('input[name="HomeTheatre"]'),
+        "Art Studio ": document.querySelector('input[name="ArtStudio"]'),
+        "Billiard Room ": document.querySelector('input[name="BilliardRoom"]'),
+        "Observatory ": document.querySelector('input[name="Observatory"]'),
+        "Trophy Room ": document.querySelector('input[name="TrophyRoom"]'),
+        "Sauna ": document.querySelector('input[name="Sauna"]'),
+        "Jacuzzi Room ": document.querySelector('input[name="JacuzziRoom"]'),
+        "Larder ": document.querySelector('input[name="Larder"]'),
+        "Bunker ": document.querySelector('input[name="Bunker"]'),
+    };
 
-const propertyFactors = {
-  Bungalow: 1.05,
-  Apartment: 1,
-  Farmhouse: 0.95,
-  Villa: 1.07,
-};
+    houseSizeDropdown.addEventListener("change", updateQuantities);
+    projectTypeDropdown.addEventListener("change", updateQuantities);
 
-const stylingFactors = {
-  Low: 1,
-  Medium: 1.1,
-  High: 1.2,
-  "Very High": 1.3,
-};
+    const quantities = {
+        "3bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0, // Updated for warm shell
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        // Add quantities for other house sizes if needed
+        "4bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        // Add quantities for other house sizes and project types if needed
+        "5bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        "6bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        "7bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+    };
+    const locationDropdown = document.getElementById("city");
+    const planDropdown = document.getElementById("projectPlan");
+    
 
-const ceilingHeightFactors = {
-  "10ft": 1,
-  "11ft": 1.05,
-  "12ft": 1.1,
-  "13ft": 1.15,
-  "14ft": 1.2,
-  "14ft+": 1.5,
-};
+    // Define cost factors based on the plan
+    const costFactors = {
+        premium: 1,
+        "premiumplus": 1.2,
+        luxury: 1.5,
+        "ultraluxury": 2,
+    };
 
-const planFactors = {
-  Premium: 1,
-  "Premium Plus": 1.2,
-  Luxury: 1.5,
-  "Ultra Luxury": 2,
-};
+    // Define base costs for each location
+    const baseCosts = {
+        ahmedabad: 20000,
+        mumbai: 30000,
+        hyderabad: 25000,
+        "metrooutskirt": 20000,
+        "metro1": 30000,
+        "metro2": 25000,
+    };
 
-const addOnPrices = {
-  "Automation": { Mumbai: 350, Ahmedabad: 200, Hyderabad: 250,"Metro City 1" : 350, "Metro City Outskirts" : 200, "Metro City 2" :250  },
-  "Civil Changes": { Mumbai: 150, Ahmedabad: 50, Hyderabad: 100,"Metro City 1" : 150, "Metro City Outskirts" : 50, "Metro City 2" :100  },
-  "Fire Fighting": { Mumbai: 25, Ahmedabad: 25, Hyderabad: 25,"Metro City 1" : 25, "Metro City Outskirts" : 25, "Metro City 2" :25  },
-  "Flooring": 	{Mumbai: 350,	Ahmedabad: 200, Hyderabad:	250,"Metro City 1" : 350, "Metro City Outskirts" : 200, "Metro City 2" :250 },
-  "Hvac": 	{Mumbai: 450, Ahmedabad: 400,	Hyderabad: 400,"Metro City 1" : 450, "Metro City Outskirts" : 400, "Metro City 2" :400 },
-  "House Keeping": 	{Mumbai: 20, Ahmedabad: 12.5, Hyderabad:	15,"Metro City 1" : 20, "Metro City Outskirts" : 12.5, "Metro City 2" :15 },
-  "Pest Control":	{Mumbai: 10, Ahmedabad:	10, Hyderabad:	10,"Metro City 1" : 10, "Metro City Outskirts" : 10, "Metro City 2" :10 },
-  "Surveillance":	{Mumbai: 50, Ahmedabad:	50, Hyderabad:	50,"Metro City 1" : 50, "Metro City Outskirts" : 50, "Metro City 2" :50 }
+    function updateQuantities() {
+        // Get the selected values from the dropdowns
+        const selectedHouseSize = houseSizeDropdown.value;
+        const selectedProjectType = projectTypeDropdown.value;
+       
+    
+        
 
-  // ...other add-ons
-};
+        // Check if the selected house size and project type exist in the quantities object
+        if (quantities[selectedHouseSize] && quantities[selectedHouseSize][selectedProjectType]) {
+            const selectedQuantities = quantities[selectedHouseSize][selectedProjectType];
 
+            // Update input field values based on selectedQuantities
+            for (const type in selectedQuantities) {
+                inputFields[type].value = selectedQuantities[type];
+            }
+        } else {
+            // Reset the input values if the selected options are not found
+            for (const type in inputFields) {
+                inputFields[type].value = "";
+            }
+        }
+    }
 
+    const unitValues = {
+        "DRAWING ROOM ": 1,
+        "KITCHEN ": 1,
+        "bedroom ": 1,
+        "entrance ": 0.25,
+        "DINING AREA ": 1,
+        "WASH YARD ": 0.25,
+        "COMMON BATH-TOILET ": 0.5,
+        "BALCONY ": 0.5,
+        "attached bathroom ": 0.5,
+        "VESTIBULE ": 0.25,
+        "VARANDAH ": 0.5,
+        "STUDY ": 0.25,
+        "SERVANT ROOM ": 0.2,
+        "SERVANT BATH ": 0.2,
+        "POWDER ROOM ": 0.25,
+        "DRESSER/ WALK-IN WARDROB ": 0.5,
+        "pantry ": 0.25,
+        "Foyer/Entryway ": 0.5,
+        "LIVING ROOM ": 1,
+        "FAMILY SIT-OUT ": 1,
+        "Hallway/Corridor ": 0.5,
+        "Small Balcony ": 0.25,
+        "Medium Balcony ": 0.5,
+        "Large Balcony ": 1,
+        "Small Bathroom ": 0.25,
+        "Medium Bathroom ": 0.5,
+        "Large Bathroom ": 1,
+        "Small Terrace ": 0.25,
+        "Medium Terrace ": 0.5,
+        "Large Terrace ": 1,
+        "Pooja ": 0.25,
+        "Staircase ": 1,
+        "OUTER KITCHEN ": 0.5,
+        "Cloakroom ": 0.25,
+        "Plant Room ": 0.5,
+        "Safe Room ": 0.25,
+        "Panic Room ": 0.25,
+        "Server Room ": 0.25,
+        "Pump Room ": 0.25,
+        "Guest Room ": 1,
+        "Children's Room/Nursery ": 1,
+        "Wine Cellar ": 0.5,
+        "Craft Room ": 1,
+        "Workshop ": 1,
+        "Media Room ": 1,
+        "Den ": 0.5,
+        "Bar Room ": 1,
+        "Library ": 1,
+        "Game Room ": 1,
+        "Music Room ": 1,
+        "Hobby Room ": 1,
+        "Home Office ": 1,
+        "Home Gym ": 1,
+        "Home Theatre ": 1,
+        "Art Studio ": 1,
+        "Billiard Room ": 1,
+        "Observatory ": 1,
+        "Trophy Room ": 1,
+        "Sauna ": 1,
+        "Jacuzzi Room ": 1,
+        "Larder ": 1,
+        "Bunker ": 1,
+    };
+
+const resultElement = document.getElementById("result");
+    locationDropdown.addEventListener("change", calculateEstimate);
+    planDropdown.addEventListener("change", calculateEstimate);
+    const selectedHouseSize = houseSizeDropdown.value;
+   projectTypeDropdown.addEventListener("change",calculateEstimate);
+// Add an event listener to the "Calculate Estimate" button
+document.getElementById("calculate-btn").addEventListener("click", calculateEstimate);
+
+// Function to calculate the total units used and total cost
 function calculateEstimate() {
-  const projectType =  document.querySelector('.button-option-project.button-selected').getAttribute('data-value');
-  const city = document.querySelector('.button-option-city.button-selected').getAttribute('data-value');
-  const propertyType = document.querySelector('.button-option-property.button-selected').getAttribute('data-value');
-  const styling = document.querySelector('.button-option-styling.button-selected').getAttribute('data-value');
-  const ceilingHeight =document.querySelector('.button-option-ceiling.button-selected').getAttribute('data-value');
-  const plan =document.querySelector('.button-option-plan.button-selected').getAttribute('data-value');
-  const carpetArea =  parseFloat(document.getElementById('carpet-area').value);
-  const addOns = document.querySelectorAll('input[name="add-on"]:checked');
-  const clientName = document.getElementById('ClientName').value;
-  const projectID = document.getElementById('ProjectID').value;
-  console.log('Name:',projectID);
-
-  const addOnValues = Array.from(addOns).map((addOn) => addOn.value);
-
-  const basePrice = basePrices[projectType][city] * carpetArea;
-  const propertyFactor = propertyFactors[propertyType];
-  const stylingFactor = stylingFactors[styling];
-  const ceilingHeightFactor = ceilingHeightFactors[ceilingHeight];
-  const planFactor = planFactors[plan];
-  const combinedFactor = propertyFactor * stylingFactor * ceilingHeightFactor * planFactor;
-
-  let estimatedPrice = basePrice * combinedFactor;
-  
-
-  // Calculate add-ons cost
-  addOnValues.forEach((addOn) => {
-      estimatedPrice += addOnPrices[addOn][city] * carpetArea;
-  });
-
-
-  return estimatedPrice;
- // Display price with two decimal places
-}
-
-
-
-function generateAddOnsCheckboxes() {
-  const addOnsContainer = document.getElementById("add-ons-container");
-
-  for (const addOn in addOnPrices) {
-    const checkboxOption = document.createElement("div");
-    checkboxOption.className = "checkbox-option";
-
-    const addOnCheckbox = document.createElement("input");
-    addOnCheckbox.type = "checkbox";
-    addOnCheckbox.name = "add-on";
-    addOnCheckbox.value = addOn;
-
-    const addOnLabel = document.createElement("label");
-    addOnLabel.textContent = addOn;
-
-    checkboxOption.appendChild(addOnCheckbox);
-    checkboxOption.appendChild(addOnLabel);
-    addOnsContainer.appendChild(checkboxOption);
-  }
-}
-
-
-
-// Function to gather user selections
-function gatherUserSelections() {
-  const projectType = document.querySelector(".button-option-project.button-selected").dataset.value;
-  const city = document.querySelector(".button-option-city.button-selected").dataset.value;
-  const propertyType = document.querySelector(".button-option-property.button-selected").dataset.value;
-  const styling = document.querySelector(".button-option-styling.button-selected").dataset.value;
-  const ceilingHeight = document.querySelector(".button-option-ceiling.button-selected").dataset.value;
-  const plan = document.querySelector(".button-option-plan.button-selected").dataset.value;
-  const carpetArea = parseFloat(document.getElementById("carpet-area").value);
-  const clientName = document.getElementById('ClientName').value;
-  const projectID = document.getElementById('ProjectID').value;
-  const selectedAddOns = [];
-  const addOnCheckboxes = document.querySelectorAll('input[name="add-on"]:checked');
-  addOnCheckboxes.forEach((checkbox) => {
-      selectedAddOns.push(checkbox.value);
-  });
-
-  return {
-      projectType,
-      city,
-      propertyType,
-      styling,
-      ceilingHeight,
-      plan,
-      carpetArea,
-      selectedAddOns,
-      clientName,
-      projectID,
-  };
-}
-
-
-// Function to update the result output
-function updateResultOutput(estimatedPrice, selections) {
-  const resultContainer = document.getElementById("result");
-
-  resultContainer.innerHTML = `
-      <h2>Estimation Results</h2>
-      <p><strong>Project Type:</strong> ${selections.projectType}</p>
-      <p><strong>City:</strong> ${selections.city}</p>
-      <p><strong>Property Type:</strong> ${selections.propertyType}</p>
-      <p><strong>Styling:</strong> ${selections.styling}</p>
-      <p><strong>Ceiling Height:</strong> ${selections.ceilingHeight}</p>
-      <p><strong>Plan Type:</strong> ${selections.plan}</p>
-      <p><strong>Carpet Area:</strong> ${selections.carpetArea} sq. ft.</p>
-      <p><strong>Add-ons:</strong> ${selections.selectedAddOns.join(", ")}</p>
-      <h3>Estimated Price:</h3>
-      <p><strong>₹${estimatedPrice.toFixed(2)}</strong></p>
-  `;
-}
-
-// Update estimated price on user interaction
-document.getElementById("calculate-btn").addEventListener("click", function () {
-  const selections = gatherUserSelections();
-  const estimatedPrice = calculateEstimate(selections);
-  updateResultOutput(estimatedPrice, selections);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  document.getElementById('calculationResult').value = estimatedPrice;
-  // const selectedSigningAmount = document.getElementById('signingAmount');
-  // const selectedPhaseOneComplete = document.getElementById('phaseOneComplete');
-  // const selectedTwoDaysBeforeComplete = document.getElementById('twoDaysBeforeComplete');
-  selectedSigningAmount = 0.4 * estimatedPrice;
-  selectedPhaseOneComplete = 0.4 * estimatedPrice;
-  selectedTwoDaysBeforeComplete = 0.2 * estimatedPrice;
-  selectedcalculationTaxAmount = 0.18 * estimatedPrice;
-  selectedtotalCalculationWithTax = estimatedPrice + selectedcalculationTaxAmount; 
-  selectedsigningTaxAmount= 0.18 * selectedSigningAmount;
-  selectedtotalSigningWithTax = selectedSigningAmount + selectedsigningTaxAmount;
-  selectedphaseOneTaxAmount = 0.18 * selectedPhaseOneComplete;
-  selectedphaseOneWithTax = selectedPhaseOneComplete + selectedphaseOneTaxAmount;
-  selectedtwoDaysBeforeCompleteTaxAmount = 0.18 * selectedTwoDaysBeforeComplete;
-  selectedtwoDaysBeforeWithTax = selectedTwoDaysBeforeComplete + selectedtwoDaysBeforeCompleteTaxAmount;
-  document.getElementById('signingAmount').value = selectedSigningAmount;
-  document.getElementById('phaseOneComplete').value = selectedPhaseOneComplete;
-  document.getElementById('twoDaysBeforeComplete').value = selectedTwoDaysBeforeComplete;
-  document.getElementById('calculationTaxAmount').value = selectedcalculationTaxAmount;
-  document.getElementById('totalCalculationWithTax').value = selectedtotalCalculationWithTax;
-  document.getElementById('signingTaxAmount').value = selectedsigningTaxAmount;
-  document.getElementById('totalSigningWithTax').value = selectedtotalSigningWithTax;
-  document.getElementById('phaseOneTaxAmount').value = selectedphaseOneTaxAmount;
-  document.getElementById('phaseOneWithTax').value = selectedphaseOneWithTax;
-  document.getElementById('twoDaysBeforeCompleteTaxAmount').value = selectedtwoDaysBeforeCompleteTaxAmount;
-  document.getElementById('twoDaysBeforeWithTax').value = selectedtwoDaysBeforeWithTax;
-  console.log('tax amount:',selectedtotalCalculationWithTax);
-  console.log('tax amount:',selectedtotalSigningWithTax);
-  
-});
-
-document.getElementById("Confirm-btn").addEventListener("click", function () {
-  const selections = gatherUserSelections();
-  const estimatedPrice = calculateEstimate(selections);
-  const resultUrl = `result.html?projectType=${selections.projectType}&city=${selections.city}&propertyType=${selections.propertyType}&styling=${selections.styling}&ceilingHeight=${selections.ceilingHeight}&plan=${selections.plan}&carpetArea=${selections.carpetArea}&selectedAddOns=${selections.selectedAddOns.join(",")}&estimatedPrice=${estimatedPrice}&clientName=${selections.clientName}&projectID=${selections.projectID}&signingAmount=${selectedSigningAmount}&phaseOneComplete=${selectedPhaseOneComplete}&twoDaysBeforeComplete=${selectedTwoDaysBeforeComplete}`;
-
-  // Redirect to the result.html page
-  window.open(resultUrl, "_blank");
-
-});
-
-// Generate add-ons checkboxes
-generateAddOnsCheckboxes();
-// ... (previous code)
-
-// Function to update the result output
-function updateResultOutput(estimatedPrice, selections) {
-    document.getElementById("result-project-type").textContent = selections.projectType;
-    document.getElementById("result-city").textContent = selections.city;
-    document.getElementById("result-property-type").textContent = selections.propertyType;
-    document.getElementById("result-styling").textContent = selections.styling;
-    document.getElementById("result-ceiling-height").textContent = selections.ceilingHeight;
-    document.getElementById("result-plan-type").textContent = selections.plan;
-    document.getElementById("result-carpet-area").textContent = selections.carpetArea;
-    document.getElementById("result-add-ons").textContent = selections.selectedAddOns.join(", ");
-    document.getElementById("result-estimated-price").textContent = estimatedPrice.toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
-
-}
-
-// ... (rest of the code)
-
-// Add event listeners for property type buttons
-const propertyTypeButtons = document.querySelectorAll(".button-option-property");
-propertyTypeButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    propertyTypeButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listeners for city buttons
-const cityButtons = document.querySelectorAll(".button-option-city");
-cityButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    cityButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listeners for ceiling height buttons
-const ceilingHeightButtons = document.querySelectorAll(".button-option-ceiling");
-ceilingHeightButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    ceilingHeightButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listeners for styling buttons
-const stylingButtons = document.querySelectorAll(".button-option-styling");
-stylingButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    stylingButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listeners for project type buttons
-const projectTypeButtons = document.querySelectorAll(".button-option-project");
-projectTypeButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    projectTypeButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listeners for plan buttons
-const planButtons = document.querySelectorAll(".button-option-plan");
-planButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Remove the .button-selected class from all buttons
-    planButtons.forEach((btn) => btn.classList.remove("button-selected"));
-
-    // Add the .button-selected class to the clicked button
-    button.classList.add("button-selected");
-  });
-});
-
-// Add event listener for the "Calculate Estimate" button
-document.getElementById("calculate-btn").addEventListener("click", function () {
-  console.log("Button clicked!"); // Check if the button click event is registered
-  const selections = gatherUserSelections();
-  console.log("Selections:", selections); // Check if selections are correctly gathered
-  const estimatedPrice = calculateEstimate(selections);
-  console.log("Estimated Price:", estimatedPrice); // Check if estimated price is calculated correctly
-  updateResultOutput(estimatedPrice, selections);
-  
-  
-
-});
-
-// Get all the city buttons
-
-// Get the hidden input field for selected city
-const selectedCityInput = document.getElementById('selected-city');
-
-// Add a click event listener to each city button
-cityButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    // Get the data-value attribute from the clicked button
-    const selectedCity = this.getAttribute('data-value');
+    const selectedLocation = locationDropdown.value.toLowerCase();
+    const selectedPlan = planDropdown.value.toLowerCase();
+    const selectedProjectType = projectTypeDropdown.value.toLowerCase();
     
-    // Set the value of the hidden input field to the selected city
-    selectedCityInput.value = selectedCity;
+    let totalUnits = 0;
+
+    for (const type in inputFields) {
+        const inputValue = inputFields[type].value;
+        console.log(`Input Value for ${type}: "${inputValue}"`);
+        const quantity = parseFloat(inputValue) || 0;
+        console.log(`Parsed Quantity for ${type}: ${quantity}`);
+        const unitValue = unitValues[type];
+        console.log(`Unit Value for ${type}: ${unitValue}`);
+        totalUnits += quantity * unitValue;
+    }
+
+    // Calculate the base cost based on the selected location
+    const baseCost = baseCosts[selectedLocation];
+    if (!baseCost) {
+        resultElement.textContent = "Invalid location selected.";
+        return;
+    }
+
+    // Calculate the cost factor based on the selected plan
+    const costFactor = costFactors[selectedPlan];
+    if (!costFactor) {
+        resultElement.textContent = "Invalid plan selected.";
+        return;
+    }
+
+    // Calculate the total cost
+    const totalCost = baseCost * totalUnits * costFactor;
+    const signingAmount = 0.4 * totalCost;
+
+    // Calculate the finalization of layout amount (58.888% of total cost)
+    const layoutFinalizationAmount = 0.4 * totalCost;
+
+    // Calculate the 3D finalization cost (17.55% of total cost)
+    const finalization3DCost = 0.2 * totalCost;
+
+    const selectedcalculationTaxAmount = 0.18 * totalCost;
+    const selectedtotalCalculationWithTax = selectedcalculationTaxAmount + totalCost;
+
+    const selectedsigningTaxAmount = 0.18 * signingAmount;
+    const selectedtotalSigningWithTax = selectedsigningTaxAmount + signingAmount;
+
+    const  selectedphaseOneTaxAmount = 0.18 * layoutFinalizationAmount
+    const  selectedphaseOneWithTax = selectedphaseOneTaxAmount + layoutFinalizationAmount;
+
+    const selectedtwoDaysBeforeCompleteTaxAmount = 0.18 * finalization3DCost;
+    const  selectedtwoDaysBeforeWithTax = selectedtwoDaysBeforeCompleteTaxAmount + finalization3DCost;
+    // Display the total units and total cost
+    if (!isNaN(totalUnits) && !isNaN(totalCost)) {
+        resultElement.textContent = ` Total Cost: ${totalCost}`;
+        
+    } else {
+        resultElement.textContent = "Invalid input. Please enter numeric values.";
+    }
+    document.getElementById('calculationResult').value = totalCost;
+    document.getElementById('signingAmountResult').value = signingAmount;
+    document.getElementById('layoutFinalizationAmountResult').value = layoutFinalizationAmount;
+    document.getElementById('3dFinalizationAmountResult').value = finalization3DCost;
+    document.getElementById('units').value = totalUnits;
+    document.getElementById('calculationTaxAmount').value = selectedcalculationTaxAmount;
+    document.getElementById('totalCalculationWithTax').value = selectedtotalCalculationWithTax;
+    document.getElementById('signingTaxAmount').value = selectedsigningTaxAmount;
+    document.getElementById('totalSigningWithTax').value = selectedtotalSigningWithTax;
+    document.getElementById('layoutFinalizationTaxAmount').value = selectedphaseOneTaxAmount;
+    document.getElementById('layoutFinalizationWithTax').value = selectedphaseOneWithTax;
+    document.getElementById('3dFinalizationTaxAmount').value = selectedtwoDaysBeforeCompleteTaxAmount;
+    document.getElementById('3dFinalizationWithTax').value = selectedtwoDaysBeforeWithTax;
+
+    // Now submit the form
+    document.forms["contact-form"].submit();
+
+    // Inside the "calculateEstimate" function
+    const selectedItems = {}; // Initialize an empty object
+
+    for (const type in inputFields) {
+        const inputValue = inputFields[type].value;
+        const quantity = parseFloat(inputValue) || 0;
+        selectedItems[type] = quantity; // Store the item name as the key and quantity as the value
+    }
+    const form = document.forms['contact-form'];
+    let clientName = ''; // Declare clientName in the outer scope
+    let projectID ='';
+
+    form.addEventListener('submit', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+      
+        // Get the value of the client name input field
+        clientName = form.elements['ClientName'].value;
+        projectID = form.elements['ProjectID'].value;
+        // Log the client name to the console
+        console.log('Project ID inside:',projectID);
+        console.log('Client Name inside event handler:', clientName);
+      
+        // Encode the selected items as a JSON string
+        const selectedItemsParam = encodeURIComponent(JSON.stringify(selectedItems));
+        const resultUrl = `result.html?selectedItems=${selectedItemsParam}&totalUnits=${totalUnits}&totalCost=${totalCost}&signingAmount=${signingAmount}&layoutFinalizationAmount=${layoutFinalizationAmount}&finalization3DCost=${finalization3DCost}&selectedLocation=${selectedLocation}&selectedHouseSize=${selectedHouseSize}&selectedPlan=${selectedPlan}&selectedProjectType=${selectedProjectType}&clientName=${clientName}&projectID=${projectID}`;
+      
+        // Open "result.html" in a new tab
+        window.open(resultUrl, '_blank');
     
-    // Optionally, you can display a message to indicate the selected city
+        // Call the function to log the client name outside the event handler
+        logClientNameOutsideHandler(clientName);
+        logClientNameOutsideHandler(projectID);
+        this.submit();
+    });
     
-  });
-});
+    function logClientNameOutsideHandler(clientName) {
+        console.log('Client Name outside event handler:', clientName);
+    }
 
-// Hidden input fields for selected values
-const selectedProjectTypeInput = document.getElementById('selected-project-type');
-const selectedPropertyTypeInput = document.getElementById('selected-property-type');
-const selectedStylingInput = document.getElementById('selected-styling');
-const selectedCeilingHeightInput = document.getElementById('selected-ceiling-height');
-const selectedPlanTypeInput = document.getElementById('selected-plan-type');
+    document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the "House Size" dropdown and input fields
+    const houseSizeDropdown = document.getElementById("projectSize");
+    const projectTypeDropdown = document.getElementById("projectType");
 
-// Add click event listeners for project type buttons
-projectTypeButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    const selectedProjectType = this.getAttribute('data-value');
-    selectedProjectTypeInput.value = selectedProjectType;
-  });
-});
+    // Define input field names with spaces as they appear in your HTML
+    const inputFields = {
+        "KITCHEN ": document.querySelector('input[name="KITCHEN"]'),
+        "bedroom ": document.querySelector('input[name="bedroom"]'),
+        "entrance ": document.querySelector('input[name="entrance"]'),
+        "DINING AREA ": document.querySelector('input[name="DININGAREA"]'),
+        "WASH YARD ": document.querySelector('input[name="WASHYARD"]'),
+        "COMMON BATH-TOILET ": document.querySelector('input[name="commonbathroom"]'),
+        "BALCONY ": document.querySelector('input[name="BALCONY"]'),
+        "attached bathroom ": document.querySelector('input[name="ATT.BATH"]'),
+        "VESTIBULE ": document.querySelector('input[name="VESTIBULE"]'),
+        "DRAWING ROOM ": document.querySelector('input[name="DRAWINGROOM"]'),
+        "VARANDAH ": document.querySelector('input[name="VARANDAH"]'),
+        "STUDY ": document.querySelector('input[name="STUDY"]'),
+        "SERVANT ROOM ": document.querySelector('input[name="SERVANTROOM"]'),
+        "SERVANT BATH ": document.querySelector('input[name="SERVANTBATH"]'),
+        "POWDER ROOM ": document.querySelector('input[name="POWDERROOM"]'),
+        "DRESSER/ WALK-IN WARDROB ": document.querySelector('input[name="DRESSER"]'),
+        "pantry ": document.querySelector('input[name="pantry"]'),
+        "Foyer/Entryway ": document.querySelector('input[name="Foyer"]'),
+        "LIVING ROOM ": document.querySelector('input[name="LIVINGROOM"]'),
+        "FAMILY SIT-OUT ": document.querySelector('input[name="FAMILYSIT-OUT"]'),
+        "Hallway/Corridor ": document.querySelector('input[name="Hallway"]'),
+        "Small Balcony ": document.querySelector('input[name="SmallBalcony"]'),
+        "Medium Balcony ": document.querySelector('input[name="MediumBalcony"]'),
+        "Large Balcony ": document.querySelector('input[name="LargeBalcony"]'),
+        "Small Bathroom ": document.querySelector('input[name="SmallBathroom"]'),
+        "Medium Bathroom ": document.querySelector('input[name="MediumBathroom"]'),
+        "Large Bathroom ": document.querySelector('input[name="LargeBathroom"]'),
+        "Small Terrace ": document.querySelector('input[name="SmallTerrace"]'),
+        "Medium Terrace ": document.querySelector('input[name="MediumTerrace"]'),
+        "Large Terrace ": document.querySelector('input[name="LargeTerrace"]'),
+        "Pooja ": document.querySelector('input[name="Pooja"]'),
+        "Staircase ": document.querySelector('input[name="Staircase"]'),
+        "OUTER KITCHEN ": document.querySelector('input[name="OUTERKITCHEN"]'),
+        "Cloakroom ": document.querySelector('input[name="Cloakroom"]'),
+        "Plant Room ": document.querySelector('input[name="PlantRoom"]'),
+        "Safe Room ": document.querySelector('input[name="SafeRoom"]'),
+        "Panic Room ": document.querySelector('input[name="PanicRoom"]'),
+        "Server Room ": document.querySelector('input[name="ServerRoom"]'),
+        "Pump Room ": document.querySelector('input[name="PumpRoom"]'),
+        "Guest Room ": document.querySelector('input[name="GuestRoom"]'),
+        "Children's Room/Nursery ": document.querySelector('input[name="ChildrenRoom"]'),
+        "Wine Cellar ": document.querySelector('input[name="WineCellar"]'),
+        "Craft Room ": document.querySelector('input[name="CraftRoom"]'),
+        "Workshop ": document.querySelector('input[name="Workshop"]'),
+        "Media Room ": document.querySelector('input[name="MediaRoom"]'),
+        "Den ": document.querySelector('input[name="Den"]'),
+        "Bar Room ": document.querySelector('input[name="BarRoom"]'),
+        "Library ": document.querySelector('input[name="Library"]'),
+        "Game Room ": document.querySelector('input[name="GameRoom"]'),
+        "Music Room ": document.querySelector('input[name="MusicRoom"]'),
+        "Hobby Room ": document.querySelector('input[name="HobbyRoom"]'),
+        "Home Office ": document.querySelector('input[name="HomeOffice"]'),
+        "Home Gym ": document.querySelector('input[name="HomeGym"]'),
+        "Home Theatre ": document.querySelector('input[name="HomeTheatre"]'),
+        "Art Studio ": document.querySelector('input[name="ArtStudio"]'),
+        "Billiard Room ": document.querySelector('input[name="BilliardRoom"]'),
+        "Observatory ": document.querySelector('input[name="Observatory"]'),
+        "Trophy Room ": document.querySelector('input[name="TrophyRoom"]'),
+        "Sauna ": document.querySelector('input[name="Sauna"]'),
+        "Jacuzzi Room ": document.querySelector('input[name="JacuzziRoom"]'),
+        "Larder ": document.querySelector('input[name="Larder"]'),
+        "Bunker ": document.querySelector('input[name="Bunker"]'),
+    };
 
-// Add click event listeners for property type buttons
-propertyTypeButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    const selectedPropertyType = this.getAttribute('data-value');
-    selectedPropertyTypeInput.value = selectedPropertyType;
-  });
-});
+    houseSizeDropdown.addEventListener("change", updateQuantities);
+    projectTypeDropdown.addEventListener("change", updateQuantities);
 
-// Add click event listeners for styling buttons
-stylingButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    const selectedStyling = this.getAttribute('data-value');
-    selectedStylingInput.value = selectedStyling;
-  });
-});
+    const quantities = {
+        "3bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0, // Updated for warm shell
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 3,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 2,
+                "VESTIBULE ": 0,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        // Add quantities for other house sizes if needed
+        "4bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 4,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 3,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        // Add quantities for other house sizes and project types if needed
+        "5bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 5,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 4,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        "6bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 6,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 5,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+        "7bhk": {
+            warmshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 0,
+                "BALCONY ": 1,
+                "attached bathroom ": 0,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            bareshell: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            interior: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+            archhitecture: {
+                "KITCHEN ": 1,
+                "bedroom ": 7,
+                "entrance ": 1,
+                "DINING AREA ": 1,
+                "WASH YARD ": 1,
+                "COMMON BATH-TOILET ": 1,
+                "BALCONY ": 1,
+                "attached bathroom ": 6,
+                "VESTIBULE ": 1,
+                "DRAWING ROOM ": 1,
+            },
+        },
+    };
+    const locationDropdown = document.getElementById("city");
+    const planDropdown = document.getElementById("projectPlan");
 
-// Add click event listeners for ceiling height buttons
-ceilingHeightButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    const selectedCeilingHeight = this.getAttribute('data-value');
-    selectedCeilingHeightInput.value = selectedCeilingHeight;
-  });
-});
+    // Define cost factors based on the plan
+    const costFactors = {
+        premium: 1,
+        "premiumplus": 1.2,
+        luxury: 1.5,
+        "ultraluxury": 2,
+    };
 
-// Add click event listeners for plan type buttons
-planButtons.forEach(button => {
-  button.addEventListener('click', function() {
-    const selectedPlanType = this.getAttribute('data-value');
-    selectedPlanTypeInput.value = selectedPlanType;
-  });
-});
+    // Define base costs for each location
+    const baseCosts = {
+        ahmedabad: 20000,
+        mumbai: 30000,
+        hyderabad: 25000,
+        "metrooutskirt": 20000,
+        "metro1": 30000,
+        "metro2": 25000,
+    };
 
+    function updateQuantities() {
+        // Get the selected values from the dropdowns
+        const selectedHouseSize = houseSizeDropdown.value;
+        const selectedProjectType = projectTypeDropdown.value;
+
+        // Check if the selected house size and project type exist in the quantities object
+        if (quantities[selectedHouseSize] && quantities[selectedHouseSize][selectedProjectType]) {
+            const selectedQuantities = quantities[selectedHouseSize][selectedProjectType];
+
+            // Update input field values based on selectedQuantities
+            for (const type in selectedQuantities) {
+                inputFields[type].value = selectedQuantities[type];
+            }
+        } else {
+            // Reset the input values if the selected options are not found
+            for (const type in inputFields) {
+                inputFields[type].value = "";
+            }
+        }
+    }
+
+    const unitValues = {
+        "DRAWING ROOM ": 1,
+        "KITCHEN ": 1,
+        "bedroom ": 1,
+        "entrance ": 0.25,
+        "DINING AREA ": 1,
+        "WASH YARD ": 0.25,
+        "COMMON BATH-TOILET ": 0.5,
+        "BALCONY ": 0.5,
+        "attached bathroom ": 0.5,
+        "VESTIBULE ": 0.25,
+        "VARANDAH ": 0.5,
+        "STUDY ": 0.25,
+        "SERVANT ROOM ": 0.2,
+        "SERVANT BATH ": 0.2,
+        "POWDER ROOM ": 0.25,
+        "DRESSER/ WALK-IN WARDROB ": 0.5,
+        "pantry ": 0.25,
+        "Foyer/Entryway ": 0.5,
+        "LIVING ROOM ": 1,
+        "FAMILY SIT-OUT ": 1,
+        "Hallway/Corridor ": 0.5,
+        "Small Balcony ": 0.25,
+        "Medium Balcony ": 0.5,
+        "Large Balcony ": 1,
+        "Small Bathroom ": 0.25,
+        "Medium Bathroom ": 0.5,
+        "Large Bathroom ": 1,
+        "Small Terrace ": 0.25,
+        "Medium Terrace ": 0.5,
+        "Large Terrace ": 1,
+        "Pooja ": 0.25,
+        "Staircase ": 1,
+        "OUTER KITCHEN ": 0.5,
+        "Cloakroom ": 0.25,
+        "Plant Room ": 0.5,
+        "Safe Room ": 0.25,
+        "Panic Room ": 0.25,
+        "Server Room ": 0.25,
+        "Pump Room ": 0.25,
+        "Guest Room ": 1,
+        "Children's Room/Nursery ": 1,
+        "Wine Cellar ": 0.5,
+        "Craft Room ": 1,
+        "Workshop ": 1,
+        "Media Room ": 1,
+        "Den ": 0.5,
+        "Bar Room ": 1,
+        "Library ": 1,
+        "Game Room ": 1,
+        "Music Room ": 1,
+        "Hobby Room ": 1,
+        "Home Office ": 1,
+        "Home Gym ": 1,
+        "Home Theatre ": 1,
+        "Art Studio ": 1,
+        "Billiard Room ": 1,
+        "Observatory ": 1,
+        "Trophy Room ": 1,
+        "Sauna ": 1,
+        "Jacuzzi Room ": 1,
+        "Larder ": 1,
+        "Bunker ": 1,
+    };
+
+    // Get a reference to the result element
+
+    locationDropdown.addEventListener("change", calculateEstimate);
+    planDropdown.addEventListener("change", calculateEstimate);
+    
+   
+
+    })}})

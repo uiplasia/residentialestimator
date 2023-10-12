@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <title>Result</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" href="favicon.ico">
-    <title>Estimation Result</title>
-    <style>
-        h7{width: 100%;
+</head>
+<style>
+    body{
+        background-color: white;
+    }
+    h7{width: 100%;
             height: 200px;
            flex-shrink: 0;
            margin: 0 0 0 0;
@@ -25,96 +24,16 @@
            margin-bottom: 10px;
 
           }
-    .result-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .plan-type-container {
-            background-color: #f0f0f0;
-            padding: 10px;
-        }
-
-        .result{
-            background-color: #ffffff;
-            padding: 10px;
-        }
-        .project-type-container{
-          background-color: #f0f0f0;
-            padding: 10px;
-        }
-        .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
-table {
-            display: table;
-            border-collapse: separate;
-            box-sizing: border-box;
-            text-indent: initial;
-            border-spacing: 2px;
-            border-color: gray;
-            margin-top: 30px;
-            
-        }
-        
-
-      th, td {
-          border: 1px solid black;
-          padding: 10px;
-          text-align: left;
-          width: 6000px;
-      }
-      td input[type='number']{
-        width: 90%;
-       }
-
-      th {
-          background-color: #4A6073;
-          color: white;
-      }
-
-    .Disclaimer{
-        margin-top: 10px;
-      font-size: 6px;
-    }
-    
-@page {
-  size: auto;   /* auto is the initial value */
-  margin: 0;  /* this affects the margin in the printer settings */
-}
-#EstimatedPriceCell{
-  
-  font-weight: bolder;
-}
-#scope li{
-  text-transform: lowercase;
-}
-#scope li::first-letter{
-  text-transform: uppercase;
-} 
-#CarpetAreaCell{
-    
-    font-weight: bolder;
-}
-td#description {
-    font-size: 10px;
-    padding-bottom: 100px;
-}
-td#Scope{
-    font-size: 10px;
-}
-body{
-    background-color: white;
-}
-  </style>
-</head>
+          th{
+            background-color:  #4A6073;
+            color: white;
+          }
+</style>
 <body>
-    <h1><img class="logo" src="companylogo.jpg" alt="UIPL"></h1>
-    <div class="container">
-        <h7>Budget Bliss: Residential Turnkey</h7>
+    <h1> <img class="logo" src="companylogo.jpg" alt="UIPL"></h1>
+    <div class="container"> 
+
+        <h7>Budget Bliss: Residential Design</h7>
         <table>
             <thead>
                 <tr>
@@ -123,70 +42,59 @@ body{
                 </tr>
             </thead>
             <tbody>
+                
                 <tr>
                     <td><strong>Client Name</strong></td>
                     <td id="ClientNameCell"></td>
                 </tr>
+                
                 <tr>
                     <td><strong>Project ID</strong></td>
                     <td id="ProjectIDCell"></td>
                 </tr>
                 <tr>
-                <td><strong>Property Type</strong></td>
-                <td id="PropertyTypeCell"></td>
-            </tr>
-            <td><strong>Project Type</strong></td>
-            <td id = "ProjectTypeCell"></td>
-            
-        </tr>
-        <tr>
-            <td><strong>City</strong></td>
-            <td id="CityCell"></td>
-        </tr>
-        <td><strong>Styling</strong></td>
-        <td id="StylingCell"></td>
-    </tr>
-    <td><strong>Plan Type</strong></td>
-    <td id="PlanTypeCell"></td>
-</tr>
-<td><strong>Carpet Area (sq.ft)</strong></td>
-<td id="CarpetAreaCell"></td>
-</tr>
-<td><strong>Add-ons</strong></td>
-<td id="AddOnsCell"></td>
-</tr>
-<tr>
-    
-    <td><strong>Estimated Price</strong></td>
-    <td id="EstimatedPriceCell"></td>
-</tr>
-<td><strong>Signing Amount</strong></td>
-<td id="SigningAmountCell"></td>
-</tr>
-<td><strong>Phase 1 Amount</strong></td>
-<td id="PhaseOneAmountCell"></td>
-</tr>
-<td><strong>Phase 2: Two Days Before Completion</strong></td>
-<td id="TwoDaysBeforeCompleteCell"></td>
-</tr>
+                    <td><strong>Project Type</strong></td>
+                    <td id="ProjectTypeCell"></td>
+                </tr>
+                <tr>
+                    <td><strong>City</strong></td>
+                    <td id="CityCell"></td>
+                </tr>
+                    <td><strong>Plan Type</strong></td>
+                    <td id = "TablePlan"></td>
+                </tr>
+                <tr>
+                    <td><strong>Estimated Price</strong></td>
+                    <td id="EstimatedPriceCell"></td>
+                </tr>
+                    <td><strong>Signing Amount</strong></td>
+                    <td id="SigningAmountCell"></td>
+                </tr>
+                    <td><strong>At Finalization of Layout</strong></td>
+                    <td id="AtFinalizationOfLayoutCell"></td>
+                </tr>
+                    <td><strong>At Finalization of 3D</strong></td>
+                    <td id="AtFinalizationOf3DCell"></td>
+                </tr>
+                <td colspan="2"><strong>GST extra as applicable</strong></td>
+
+        <table>
+            <thead>
+                <tr>
+                    <th><strong>Project Scope</strong></th>
+                    <th id = "TablePlan2"><strong>Plan Type: </strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="scope"><strong>No. of Units to be designed </strong><ul id="selected-items-list">
+                    </ul></td>
+                    <td id="description"><ul id="planDescription"></ul></td>
+                </tr>
+                
 
 
-<table>
-    <thead>
-        <tr>
-            <th><strong>Project Inclusions</strong></th>
-            <th id = "TablePlan2"><strong>Plan Type: </strong></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td id="Scope"></td>
-            <td id="description"></td>
-        </tr>
-        
-        
-        
-    </tbody>
+</tbody>
 </table>
 <div class = "Disclaimer">
     
@@ -194,148 +102,190 @@ body{
     <br>
     *This document is for informational purposes only and does not create any legally binding obligations. The figures presented are preliminary estimates and should not be considered as the final project cost but rather serve as a general guideline. It is essential to note that these estimates are subject to change, considering various factors that can impact project pricing based on market dynamics. For a precise project budget, consider utilising our design/turnkey contract services. Our expert consultation will guide you through the process.
 </div>
-
-</div>
     
-      
-    <button id="download-pdf-btn">Download PDF</button>
+    </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get the URL parameters for selected items, total units, total cost, signing amount, and layout finalization amount
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedItemsParam = urlParams.get("selectedItems");
+    const totalUnitsParam = urlParams.get("totalUnits");
+    const totalCostParam = urlParams.get("totalCost");
+    const signingAmountParam = urlParams.get("signingAmount");
+    const layoutFinalizationAmountParam = urlParams.get("layoutFinalizationAmount");
+    const finalization3DCostParam = urlParams.get("finalization3DCost");
+    const selectedLocationParam = urlParams.get("selectedLocation");
+    const selectedHouseSizeParam = urlParams.get("selectedHouseSize");
+    const selectedProjectTypeParam = urlParams.get("selectedProjectType");
+    const selectedPlanTypeParam = urlParams.get("selectedPlan"); 
+    const selectedClientNameParam = urlParams.get("clientName");
+    const selectedProjectIDParam = urlParams.get("projectID");
 
-    <script>
-        // Get URL parameters using URLSearchParams
-        const urlParams = new URLSearchParams(window.location.search);
-        const projectType = urlParams.get("projectType");
-        const city = urlParams.get("city");
-        const propertyType = urlParams.get("propertyType");
-        const styling = urlParams.get("styling");
-        const ceilingHeight = urlParams.get("ceilingHeight");
-        const plan = urlParams.get("plan");
-        const carpetArea = parseFloat(urlParams.get("carpetArea"));
-        const selectedAddOns = urlParams.get("selectedAddOns").split(",");
-        const estimatedPrice = parseFloat(urlParams.get("estimatedPrice"));
-        const clientName = urlParams.get("clientName");
-        const projectID = urlParams.get("projectID");
-        const signingAmount = urlParams.get("signingAmount");
-        const phaseOneComplete = urlParams.get("phaseOneComplete");
-        const twoDaysBeforeComplete = urlParams.get("twoDaysBeforeComplete");
+               
+    // Parse the selected items JSON string
+    const selectedItems = JSON.parse(decodeURIComponent(selectedItemsParam));
     
+    // Get a reference to the element where you want to display the selected items and quantities
+    const selectedItemsList = document.getElementById("selected-items-list");
+    
+    // Loop through the selected items and display only those with a quantity of at least 1
+    for (const itemName in selectedItems) {
+        const quantity = selectedItems[itemName];
+        if (quantity >= 1) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${itemName} - ${quantity}`;
+            selectedItemsList.appendChild(listItem);
+        }
         
+    }
+     
+
+
+    console.log('Client Name:',selectedProjectIDParam);
     const clientNameCell = document.getElementById("ClientNameCell");
-    clientNameCell.textContent += clientName;
-    
+    clientNameCell.textContent += selectedClientNameParam;
+
+
     const projectIDCell = document.getElementById("ProjectIDCell");
-    projectIDCell.textContent += projectID;
-    const propertyTypeCell = document.getElementById("PropertyTypeCell");
-    
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    propertyTypeCell.textContent += propertyType.charAt(0).toUpperCase() + propertyType.slice(1);
-     
-    const projectTypeCell = document.getElementById("ProjectTypeCell");
-    
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    projectTypeCell.textContent += projectType.charAt(0).toUpperCase() + projectType.slice(1);
-     
+    projectIDCell.textContent += selectedProjectIDParam;
     const cityCell = document.getElementById("CityCell");
     
     // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    cityCell.textContent += city.charAt(0).toUpperCase() + city.slice(1);
-    const stylingCell = document.getElementById("StylingCell");
+    cityCell.textContent += selectedLocationParam.charAt(0).toUpperCase() + selectedLocationParam.slice(1);
+    const projectTypeCell = document.getElementById("ProjectTypeCell");
     
     // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    stylingCell.textContent += styling.charAt(0).toUpperCase() + styling.slice(1);
-     
-    const planTypeCell = document.getElementById("PlanTypeCell");
+    projectTypeCell.textContent += selectedProjectTypeParam.charAt(0).toUpperCase() + selectedProjectTypeParam.slice(1);
     
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    planTypeCell.textContent += plan.charAt(0).toUpperCase() + plan.slice(1);
-
-     
-    const carpetAreaCell = document.getElementById("CarpetAreaCell");
     
-    // Set the text content of the house size cell to the value of selectedHouseSizeParam
-    carpetAreaCell.textContent += carpetArea;
 
-    const addOnsCell = document.getElementById("AddOnsCell");
+    // Get a reference to the table cell where you want to display the plan type
+    const planTypeCell = document.getElementById("TablePlan");
 
-    addOnsCell.textContent += selectedAddOns.join(", ");
+    // Set the text content of the plan type cell to the value of selectedPlanTypeParam
+    planTypeCell.textContent += selectedPlanTypeParam.charAt(0).toUpperCase() + selectedPlanTypeParam.slice(1);
+
+    const planTypeCell2 = document.getElementById("TablePlan2");
+
+    // Set the text content of the plan type cell to the value of selectedPlanTypeParam
+    planTypeCell2.textContent += selectedPlanTypeParam.charAt(0).toUpperCase() + selectedPlanTypeParam.slice(1);
     
     const estimatedPriceCell = document.getElementById("EstimatedPriceCell");
-    
-    
+
 // Assuming totalCostParam is a numeric value, e.g., 10000
-const formattedPrice = parseFloat(estimatedPrice).toLocaleString("en-IN", {
+const formattedPrice = parseFloat(totalCostParam).toLocaleString("en-IN", {
     style: "currency",
     currency: "INR"
 });
 
 estimatedPriceCell.textContent = formattedPrice;
+
 const signingAmountCell = document.getElementById("SigningAmountCell");
-    
-    
-    // Assuming totalCostParam is a numeric value, e.g., 10000
-    const formattedSigningPrice = parseFloat(signingAmount).toLocaleString("en-IN", {
-        style: "currency",
-        currency: "INR"
-    });
-signingAmountCell.textContent = formattedSigningPrice;
 
-const phaseOneAmountCell = document.getElementById("PhaseOneAmountCell");
-    
-    
-    // Assuming totalCostParam is a numeric value, e.g., 10000
-    const formattedPhaseOnePrice = parseFloat(phaseOneComplete).toLocaleString("en-IN", {
-        style: "currency",
-        currency: "INR"
-    });
-phaseOneAmountCell.textContent = formattedPhaseOnePrice;
+// Assuming signingAmountParam is a numeric value, e.g., 5000
+const formattedSigningAmount = parseFloat(signingAmountParam).toLocaleString("en-IN", {
+    style: "currency",
+    currency: "INR"
+});
 
-const twoDaysBeforeCompleteCell = document.getElementById("TwoDaysBeforeCompleteCell");
-    
-    
-    // Assuming totalCostParam is a numeric value, e.g., 10000
-    const formattedPhaseTwoPrice = parseFloat(twoDaysBeforeComplete).toLocaleString("en-IN", {
-        style: "currency",
-        currency: "INR"
-    });
-twoDaysBeforeCompleteCell.textContent = formattedPhaseTwoPrice;
+signingAmountCell.textContent = formattedSigningAmount;
 
 
+const atFinalizationOfLayoutCell = document.getElementById("AtFinalizationOfLayoutCell");
+
+// Assuming layoutFinalizationAmountParam is a numeric value, e.g., 75000
+const formattedLayoutFinalizationAmount = parseFloat(layoutFinalizationAmountParam).toLocaleString("en-IN", {
+    style: "currency",
+    currency: "INR"
+});
+
+atFinalizationOfLayoutCell.textContent = formattedLayoutFinalizationAmount;
 
 
+const atFinalizationOf3DCell = document.getElementById("AtFinalizationOf3DCell");
+
+// Assuming finalization3DCostParam is a numeric value, e.g., 90000
+const formattedFinalization3DAmount = parseFloat(finalization3DCostParam).toLocaleString("en-IN", {
+    style: "currency",
+    currency: "INR"
+});
+
+atFinalizationOf3DCell.textContent = formattedFinalization3DAmount;
 
 
 
-
-
-
-
-
-
-const planTypeCell2 = document.getElementById("TablePlan2");
-
-    // Set the text content of the plan type cell to the value of selectedPlanTypeParam
-planTypeCell2.textContent += plan.charAt(0).toUpperCase() + plan.slice(1);
-    
-
-const planDescriptionList = document.getElementById("description");
+const planDescriptionList = document.getElementById("planDescription");
 
 // Define the plan descriptions based on selectedPlanTypeParam
 let planDescription = "";
 
-if (plan === "Premium") {
+if (selectedPlanTypeParam === "premium") {
     planDescription = `
-    <li>Local Sourcing</li> <li>Budget-Friendly</li> <li>Standard Designing</li>  <li>Basic Accessories</li>
+            <li>Family & Individual Lifestyle Analysis </li>
+            <li>Research & Study of Requirements</li>
+            <li>Style & Theme Selection</li>
+            <li>Effective Space Planning</li>
+            <li>Furniture Layout</li>
+            <li>Civil Layout</li>
+            <li>Electrical Layout</li>
+            <li>Flooring & Ceiling Layout</li>
+            <li>Colour Concept</li>
+            <li>Customized Conceptual Designing with Elevation</li>
+            <li>Detailed Working Drawings</li>
+            <li>3D Images to Visualize Important Areas</li>
+            <li>Exclusive Arts for Desired Ambiance</li>
     `;
-} else if (plan === "Premium Plus") {
+} else if (selectedPlanTypeParam === "premiumplus") {
     planDescription = `
-    <li>Local Sourcing</li><li>Mid-Priced</li><li>Premium Designing</li> <li>Enhanced Accessories</li>
+    <li>Family & Individual Lifestyle Analysis </li>
+            <li>Research & Study of Requirements</li>
+            <li>Style & Theme Selection</li>
+            <li>Effective Space Planning</li>
+            <li>Furniture Layout</li>
+            <li>Civil Layout</li>
+            <li>Electrical Layout</li>
+            <li>Flooring & Ceiling Layout</li>
+            <li>Colour Concept</li>
+            <li>Customized Conceptual Designing with Elevation</li>
+            <li>Detailed Working Drawings</li>
+            <li> 3D Images to Visualize Important Areas</li>
+            <li> Exclusive Arts for Desired Ambiance</li>
     `;
-} else if (plan === "Luxury") {
+} else if (selectedPlanTypeParam === "luxury") {
     planDescription = `
-    <li>Local & Global Sourcing</li><li>High-Priced</li><li>Lavish Designing</li><li>Premium Accessories</li>
+    <li>Family & Individual Lifestyle Analysis </li>
+            <li>Research & Study of Requirements</li>
+            <li>Style & Theme Selection</li>
+            <li>Effective Space Planning</li>
+            <li>Furniture Layout</li>
+            <li>Civil Layout</li>
+            <li>Electrical Layout</li>
+            <li>Flooring & Ceiling Layout</li>
+            <li>Colour Concept</li>
+            <li>Customized Conceptual Designing with Elevation</li>
+            <li>Detailed Working Drawings</li>
+            <li> 3D Images to Visualize Important Areas</li>
+            <li> Exclusive Arts for Desired Ambiance</li>
+            <li>Printed Coffee Table Book</li>
     `;
-} else if (plan === "Ultra Luxury") {
+} else if (selectedPlanTypeParam === "ultraluxury") {
     planDescription = `
-    <li>Local & Global Sourcing</li><li>Elite Pricing</li><li>Ultimate Designing</li><li>Luxury Accessories</li><li>Premium Imported Products</li>
+    <li>Family & Individual Lifestyle Analysis </li>
+            <li>Research & Study of Requirements</li>
+            <li>Style & Theme Selection</li>
+            <li>Effective Space Planning</li>
+            <li>Furniture Layout</li>
+            <li>Civil Layout</li>
+            <li>Electrical Layout</li>
+            <li>Flooring & Ceiling Layout</li>
+            <li>Colour Concept</li>
+            <li>Customized Conceptual Designing with Elevation</li>
+            <li>Detailed Working Drawings</li>
+            <li> 3D Images to Visualize Important Areas</li>
+            <li> Exclusive Arts for Desired Ambiance</li>
+            <li>Printed Coffee Table Book</li>
+            <li> 3D Walkthrough</li>
+
     `;
 } else {
     planDescription = "Plan description not available.";
@@ -343,115 +293,18 @@ if (plan === "Premium") {
 
 // Set the inner HTML of the planDescriptionList with the generated plan description
 planDescriptionList.innerHTML = planDescription;
-
-const scopeDiscriptionList = document.getElementById("Scope");
-let scopeDiscription ="";
-
-
-        if (projectType === "warmshell") {
-            scopeDiscription += `
-            <li>Accessories</li>
-            <li>Artifact</li>
-            <li>Ceiling Treatment</li>
-            <li>Customized Furniture</li>
-            <li>Decorative Lights</li>
-            <li>Doors Renovation</li>
-            <li>Electrical</li>
-            <li>Fixed Lights</li>
-            <li>Fans</li>
-            <li>Readymade Furniture</li>
-            <li>Soft Furnishings</li>
-            <li>Wall Treatment</li>
-            <li>Window Treatment</li>
-            `;
-        } else if (projectType === "bareshell") {
-            scopeDiscription += `
-            <li>Accessories</li>
-            <li>Artifact</li>
-            <li>Ceiling Treatment</li>
-            <li>Customized Furniture</li>
-            <li>Decorative Lights</li>
-            <li>Doors Renovation</li>
-            <li>Electrical</li>
-            <li>Fixed Lights</li>
-            <li>Fans</li>
-            <li>Readymade Furniture</li>
-            <li>Soft Furnishings</li>
-            <li>Wall Treatment</li>
-            <li>Window Treatment</li>
-            <li>Civil changes </li>
-            <li>Flooring </li>
-            <li>Kitchen Platform</li>
-            <li>Plumbing</li>
-            <li>Sanitary Ware</li>
-            <li>Wall Tiles</li>
-            <li>Waterproofing</li>
-            `;
-        } else if (projectType === "architecture") {
-            scopeDiscription += `
-            <li>Accessories</li>
-            <li>Artifact</li>
-            <li>Ceiling Treatment</li>
-            <li>Customized Furniture</li>
-            <li>Decorative Lights</li>
-            <li>Doors Renovation</li>
-            <li>Electrical</li>
-            <li>Fixed Lights</li>
-            <li>Fans</li>
-            <li>Readymade Furniture</li>
-            <li>Soft Furnishings</li>
-            <li>Wall Treatment</li>
-            <li>Window Treatment</li>
-            <li>Civil changes</li>
-            <li>Flooring </li>
-            <li>Kitchen Platform</li>
-            <li>Plumbing</li>
-            <li>Sanitary Ware</li>
-            <li>Wall Tiles</li>
-            <li>Waterproofing</li>
-            <li>Civil</li>
-            <li>Windows</li>
-            <li>Fabrication</li>
-            <li>Pest Control</li>
-            <li>Doors</li>
-            <li>Door Frames</li> 
-             `;
-        } else if (projectType === "renovation"){
-            scopeDiscription += `
-            <li>Accessories</li>
-            <li>Artifact</li>
-            <li>Ceiling Treatment</li>
-            <li>Customized Furniture</li>
-            <li>Decorative Lights</li>
-            <li>Doors Renovation</li>
-            <li>Electrical</li>
-            <li>Fixed Lights</li>
-            <li>Fans</li>
-            <li>Readymade Furniture</li>
-            <li>Soft Furnishings</li>
-            <li>Wall Treatment</li>
-            <li>Window Treatment</li>
-            <li>Civil changes </li>
-            <li>Flooring </li>
-            <li>Kitchen Platform</li>
-            <li>Plumbing</li>
-            <li>Sanitary Ware</li>
-            <li>Wall Tiles</li>
-            <li>Waterproofing</li>`
-
-        }
-        scopeDiscriptionList.innerHTML = scopeDiscription;
-       
-       </script>
-      
-     
+   
     
-      <script>
-        document.getElementById("download-pdf-btn").addEventListener("click", function () {
-            window.print();
-        });
+});
+
+</script>
+
+<button id="download-pdf-btn">Download PDF</button>
+
+<script>
+    document.getElementById("download-pdf-btn").addEventListener("click", function () {
+        window.print();
+    });
     </script>
-    
-    
 </body>
 </html>

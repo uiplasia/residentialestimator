@@ -1,0 +1,249 @@
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            border: 5px solid #BDA081;
+            background: #DDE9EC;
+            box-shadow: 20px 20px 20px 10px rgba(0, 0, 0, 0.25);
+        }
+        select, input[type="text"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 20px;
+          border: 5px solid #BDA081;
+          background: #DDE9EC;
+          box-shadow: 20px 20px 20px 10px rgba(0, 0, 0, 0.25);
+      }
+      input{
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        border: 5px solid #BDA081;
+        background: #DDE9EC;
+        box-shadow: 20px 20px 20px 10px rgba(0, 0, 0, 0.25);
+      }
+        #result {
+            font-weight: bold;
+        }
+
+        .attribute-list {
+            margin-top: 20px;
+        }
+
+        .attribute-list label {
+            display: flex;
+            align-items: center;
+        }
+
+        .attribute-list input[type="number"] {
+            margin-left: 10px;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #C9D1D9;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+          }
+          .logo {
+            width: 351.7px; /* Set the width of the logo */
+            height: 200px; /* Set the height of the logo */
+            background-image: url('companylogo.jpg'); /* Replace with the actual path to your logo image */
+            background-size: cover;
+            margin-right: 10px; /* Add margin to the right of the logo for spacing */
+            margin-left: 10px;
+          }
+          h1 {width: 100%;
+             height: 200px;
+            flex-shrink: 0;
+            background: white;
+            box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            margin: 0 0 0 0;
+            margin-bottom: 5%;
+            color: #000;
+            text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
+            font-family: Alegreya;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-align: center;
+          }
+          h2 {
+            height: 70px;
+            font-family: Alegreya;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-align: center;
+            text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+            margin-bottom: 0px;
+            margin-top: 0px;
+          }
+          h3 {
+            font-family: Alegreya;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-align: center;
+            text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+            margin-bottom: 5%;
+            margin-top: 0px;
+          }
+          h5{
+            height: 70px;
+            font-family: Alegreya;
+            font-size: 38px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-align: center;
+            text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+            margin-bottom: 0px;
+            margin-top: 1%;
+          }
+          h7{width: 100%;
+            height: 200px;
+           flex-shrink: 0;
+           margin: 0 0 0 0;
+           margin-bottom: 5%;
+           color: #000;
+           font-family: Alegreya;
+           font-size: 50px;
+           font-style: normal;
+           font-weight: 700;
+           line-height: normal;
+           text-align: center;
+           margin-bottom: 10px;
+
+          }
+          label {
+              font-weight: bold;
+              display: block;
+              margin-bottom: 5px;
+              margin-top: 5px;
+          }
+          
+          
+          
+          button {width: 249px;
+            height: 74px;
+            flex-shrink: 0;
+            border-radius: 40px;
+            border: 5px solid #BDA081;
+            background: #4A6073;
+            box-shadow: 10px 10px 10px 20px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            align-self: auto;
+            color: #FFF;
+            font-family: Alegreya;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-top: 5%;
+            margin-left: 40%; 
+          }
+          
+          button:hover {
+              background-color: #555;
+          }
+          
+          /* 
+            
+            /* Add this to your styles.css file */
+          /* Add this to your styles.css file */
+          .content {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              text-align: center;
+              padding: 0px;
+              box-sizing: border-box;
+              margin-left: 0px;
+          }
+
+          input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            border: 5px solid #BDA081;
+            background: #DDE9EC;
+            box-shadow: 20px 20px 20px 10px rgba(0, 0, 0, 0.25);
+        }
+
+
+        table {
+            display: table;
+            border-collapse: separate;
+            box-sizing: border-box;
+            text-indent: initial;
+            border-spacing: 2px;
+            border-color: gray;
+            margin-top: 30px;
+            
+        }
+        
+
+      th, td {
+          border: 1px solid black;
+          padding: 10px;
+          text-align: left;
+          width: 6000px;
+      }
+      td input[type='number']{
+        width: 90%;
+       }
+
+      th {
+          background-color: #f2f2f2;
+      }
+
+    .Disclaimer{
+      margin-top: 10px;
+      font-size: 6px;
+    }
+    
+#description{
+  font-size: 10px;
+}
+@page {
+  size: auto;   /* auto is the initial value */
+  margin: 0;  /* this affects the margin in the printer settings */
+}
+#EstimatedPriceCell{
+
+  font-weight: bolder;
+}
+#scope li{
+  text-transform: lowercase;
+}
+#scope li::first-letter{
+  text-transform: uppercase;
+} 
+#scope{
+  font-size: 10px;
+}
+
